@@ -13,10 +13,12 @@ public class QuestSystem : MonoBehaviour
 
     private void Start()
     {
-        //adding quests to the list
+        //creating the quests using the factory pattern
         Quest fetchQuest = QuestFactory.CreateFetchQuest("buy monster", "go to the store to buy monster", "purchase monster energy");
         Quest objectiveQuest = QuestFactory.CreateObjectiveQuest("play 4 hours of overwatch", "get mad at the overwatch competetive mode", "enjoy overwatch (difficulty : impossible)");
 
+
+        //adding the quests to the list
         quests.Add(fetchQuest);
         quests.Add(objectiveQuest);
 
@@ -66,6 +68,8 @@ public class QuestSystem : MonoBehaviour
 
 
     #region observer pattern
+
+    // Observer pattern to notify UI when quest status changes
     private void DisplayQuestInf()
     {
         // Display the current quest status in UI

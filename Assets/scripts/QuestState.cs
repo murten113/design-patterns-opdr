@@ -31,12 +31,14 @@ public class Quest
 
     public void StartQuest()
     {
+        // Start the quest and set the quest state to InProgress
         state = QuestState.InProgress;
         Debug.Log($"{questName} started: {description}");
     }
 
     public void CompleteQuest()
     {
+        // Complete the quest and set the quest state to Completed
         state = QuestState.Completed;
         Debug.Log($"{questName} completed!");
     }
