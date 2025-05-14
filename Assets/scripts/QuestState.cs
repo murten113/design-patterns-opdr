@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 
+
+#region State pattern
 public enum QuestState
 {
     //all the possible states of a quest
@@ -39,3 +41,4 @@ public class Quest
         Debug.Log($"{questName} completed!");
     }
 }
+#endregion
