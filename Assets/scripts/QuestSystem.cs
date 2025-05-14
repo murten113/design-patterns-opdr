@@ -1,25 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestSystem : MonoBehaviour
 {
 
     //list of all the quests
-    public List<Quest> quests = new List<Quest>(); 
+    public List<Quest> quests = new List<Quest>();
+
+    // UI Text to display current quest status
+    public Text questText;  
 
     private void Start()
     {
        //adding quests to the list
         quests.Add(new Quest("buy monster", "go to the store to buy monster", "purchase monster energy"));
         quests.Add(new Quest("play 4 hours of overwatch", "get mad at the overwatch competetive mode", "enjoy overwatch (difficulty : impossible)"));
+
+        DisplayQuestInf();
     }
 
     public void StartQuest(string questName)
     {
+        // Start a quest by its name
         Quest quest = GetQuestByName(questName);
         if (quest != null && quest.state == QuestState.NotStarted)
         {
             quest.StartQuest();
+            DisplayQuestInf();
         }
         else
         {
@@ -29,10 +37,12 @@ public class QuestSystem : MonoBehaviour
 
     public void CompleteQuest(string questName)
     {
+        // Complete a quest by its name
         Quest quest = GetQuestByName(questName);
         if (quest != null && quest.state == QuestState.InProgress)
         {
             quest.CompleteQuest();
+            DisplayQuestInf();
         }
         else
         {
@@ -42,11 +52,28 @@ public class QuestSystem : MonoBehaviour
 
     private Quest GetQuestByName(string questName)
     {
+        // Find the quest by its name
         foreach (var quest in quests)
         {
             if (quest.questName == questName)
                 return quest;
         }
         return null;
+    }
+
+    private void DisplayQuestInf()
+    {
+        // Display the current quest status in UI
+        foreach (var quest in quests)
+        {
+            if (quest.state == QuestState.InProgress)
+            {
+                questText.text = $"Quest: {quest.questName} - {quest.objective}";
+                return;  
+            }
+        }
+
+        //no active quests
+        questText.text = "No active quests";  
     }
 }
