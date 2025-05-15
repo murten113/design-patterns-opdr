@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 
 
-#region State pattern
+// State Pattern
 public enum QuestState
 {
-    //all the possible states of a quest
+    // All the possible states of a quest
     NotStarted,
     InProgress,
     Completed
@@ -14,7 +14,6 @@ public enum QuestState
 
 public class Quest
 {
-    
     public string questName;
     public string description;
     public QuestState state;
@@ -43,4 +42,3 @@ public class Quest
         Debug.Log($"{questName} completed!");
     }
 }
-#endregion

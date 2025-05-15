@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class QuestSystem : MonoBehaviour
 {
 
-    //list of all the quests
+    // List of all the quests
     public List<Quest> quests = new List<Quest>();
 
     // UI Text to display current quest status
@@ -13,16 +13,16 @@ public class QuestSystem : MonoBehaviour
 
     private void Start()
     {
-        //creating the quests using the factory pattern
+        // Creating the quests using the factory pattern
         Quest fetchQuest = QuestFactory.CreateFetchQuest("buy monster", "go to the store to buy monster", "purchase monster energy");
-        Quest objectiveQuest = QuestFactory.CreateObjectiveQuest("play 4 hours of overwatch", "get mad at the overwatch competetive mode", "enjoy overwatch (difficulty : impossible)");
+        Quest objectiveQuest = QuestFactory.CreateObjectiveQuest("play 4 hours of overwatch", "get mad at the overwatch competitive mode", "enjoy overwatch (difficulty : impossible)");
 
 
-        //adding the quests to the list
+        // Adding the quests to the list
         quests.Add(fetchQuest);
         quests.Add(objectiveQuest);
 
-        DisplayQuestInf();
+        DisplayQuestInfo();
     }
 
     public void StartQuest(string questName)
@@ -32,7 +32,7 @@ public class QuestSystem : MonoBehaviour
         if (quest != null && quest.state == QuestState.NotStarted)
         {
             quest.StartQuest();
-            DisplayQuestInf();
+            DisplayQuestInfo();
         }
         else
         {
@@ -47,7 +47,7 @@ public class QuestSystem : MonoBehaviour
         if (quest != null && quest.state == QuestState.InProgress)
         {
             quest.CompleteQuest();
-            DisplayQuestInf();
+            DisplayQuestInfo();
         }
         else
         {
@@ -66,11 +66,9 @@ public class QuestSystem : MonoBehaviour
         return null;
     }
 
-
     #region observer pattern
-
     // Observer pattern to notify UI when quest status changes
-    private void DisplayQuestInf()
+    private void DisplayQuestInfo()
     {
         // Display the current quest status in UI
         foreach (var quest in quests)
@@ -82,7 +80,7 @@ public class QuestSystem : MonoBehaviour
             }
         }
 
-        //no active quests
+        // No active quests
         questText.text = "No active quests";  
     }
     #endregion
